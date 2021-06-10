@@ -1,5 +1,5 @@
-drop table if exists customer;
-create table if not exists customer
+drop table if exists klant;
+create table if not exists klant
 (
     id             int auto_increment primary key,
     voornaam       varchar(80)  not null,
