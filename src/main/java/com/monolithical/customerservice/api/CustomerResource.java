@@ -1,4 +1,4 @@
-package com.monolithical.customerservice.api.v1;
+package com.monolithical.customerservice.api;
 
 import com.monolithical.customerservice.domain.Customer;
 import com.monolithical.customerservice.persistence.CustomerRepository;
@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/customers")
+@RequestMapping("/customers")
 public class CustomerResource {
 
   private final CustomerRepository customerRepository;

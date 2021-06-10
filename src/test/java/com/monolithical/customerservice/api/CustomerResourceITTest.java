@@ -1,5 +1,6 @@
-package com.monolithical.customerservice.api.v1;
+package com.monolithical.customerservice.api;
 
+import com.monolithical.customerservice.api.CustomerResource;
 import com.monolithical.customerservice.domain.Address;
 import com.monolithical.customerservice.domain.Customer;
 import com.monolithical.customerservice.persistence.CustomerRepository;
@@ -28,7 +29,7 @@ public class CustomerResourceITTest {
 
   @Test
   public void list_customers_mapping_exists_returns_200_ok() throws Exception {
-    mvc.perform(get("/api/v1/customers").accept(MediaType.APPLICATION_JSON))
+    mvc.perform(get("/customers").accept(MediaType.APPLICATION_JSON))
         .andExpect(status().isOk());
   }
 
@@ -36,7 +37,7 @@ public class CustomerResourceITTest {
   public void get_customers_returns_customer_json_objects_in_json_array() throws Exception {
     Mockito.when(customerRepository.findAll()).thenReturn(List.of(new Customer()));
 
-    mvc.perform(get("/api/v1/customers").accept(MediaType.APPLICATION_JSON))
+    mvc.perform(get("/customers").accept(MediaType.APPLICATION_JSON))
         .andExpect(status().isOk())
         .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
         .andExpect(jsonPath("$.*", isA(ArrayList.class)))
@@ -55,7 +56,7 @@ public class CustomerResourceITTest {
     customer.setAddress(new Address());
     Mockito.when(customerRepository.findAll()).thenReturn(List.of(customer));
 
-    mvc.perform(get("/api/v1/customers").accept(MediaType.APPLICATION_JSON))
+    mvc.perform(get("/customers").accept(MediaType.APPLICATION_JSON))
         .andExpect(status().isOk())
         .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
         .andExpect(jsonPath("$.*", isA(ArrayList.class)))

@@ -9,11 +9,12 @@ Not using Spring REST repositories
 Basic mapping
 Phase2: Swagger docs
 ```
-GET:    {domain}/api/v1/customers       - returns al customers ? possible filtering
-GET:    {domain}/api/v1/customers/{id}  - returns specific customer
-POST    {domain}/api/v1/customers       - create new user
-DELETE: {domain}/api/v1/customers/{id}  - delete specific user
-PUT:    {domain}/api/v1/customers/{id}  - update specific user
+api prefix and version should be handled by an api gateway
+GET:    {domain}/customers       - returns al customers ? possible filtering
+GET:    {domain}/customers/{id}  - returns specific customer
+POST    {domain}/customers       - create new user
+DELETE: {domain}/customers/{id}  - delete specific user
+PUT:    {domain}/customers/{id}  - update specific user
 ```
 ## Authentication
 

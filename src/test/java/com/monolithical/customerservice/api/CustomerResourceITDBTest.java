@@ -1,4 +1,4 @@
-package com.monolithical.customerservice.api.v1;
+package com.monolithical.customerservice.api;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -33,7 +33,7 @@ public class CustomerResourceITDBTest {
 
   @Test
   void list_fetches_customer_data_from_db() throws Exception {
-    mvc.perform(get("/api/v1/customers").accept(MediaType.APPLICATION_JSON))
+    mvc.perform(get("/customers").accept(MediaType.APPLICATION_JSON))
         .andExpect(status().isOk())
         .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
         .andExpect(jsonPath("$.*", isA(ArrayList.class)))
