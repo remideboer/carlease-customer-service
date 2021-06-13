@@ -3,11 +3,22 @@
 ## Functionality
 
 RESTFull webservice facilitating CRUD operations on a Customer datastore 
-Not using Spring REST repositories
+Not using Spring REST repositories for this service (even though that would speed things up tremendously)
+
+- [x] list customers
+- [x] create customer
+- [ ] fetch customer by id
+- [ ] update customers attribute
+- [ ] delete specific customer
+- [ ] fetch customers by name keyword
+- [ ] authentication
+- [ ] containerize
+
+Phasing depends on how much time can be made free
 
 ### URL mapping
-Basic mapping
-Phase2: Swagger docs
+- [x] Phase 1: Basic URL mapping docs
+- [ ] Phase 2: Swagger docs
 ```
 api prefix and version should be handled by an api gateway
 GET:    {domain}/customers       - returns al customers ? possible filtering
@@ -18,9 +29,10 @@ PUT:    {domain}/customers/{id}  - update specific user
 ```
 ## Authentication
 
-Phase 1: using JWT with refresh using symmetric keys
-Phase 2: using JWT with refresh using asymmetric keys
-Phase 3: if time -> JWT facilitated by Keycloak
+- [ ] Phase 1: using JWT with using symmetric keys
+- [ ] Phase 2: using JWT adding refresh token
+- [ ] Phase 3: using JWT using asymmetric keys
+- [ ] Phase 4: JWT facilitated by Keycloak
 
 ```shell
 docker run -p 9090:8080 -e KEYCLOAK_USER=admin -e KEYCLOAK_PASSWORD=admin quay.io/keycloak/keycloak:13.0.1
