@@ -2,11 +2,16 @@ package com.monolithical.customerservice.api;
 
 import com.monolithical.customerservice.domain.Address;
 import com.monolithical.customerservice.domain.Customer;
+import com.monolithical.customerservice.filters.JWTFilter;
 import com.monolithical.customerservice.persistence.CustomerRepository;
+import com.monolithical.customerservice.util.validation.JWTValidator;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
@@ -21,11 +26,19 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(controllers = CustomerResource.class)
+@AutoConfigureMockMvc(addFilters = false)
 public class CustomerResourceITTest {
 
   @Autowired private MockMvc mvc;
 
   @MockBean private CustomerRepository customerRepository;
+
+  @MockBean private JWTFilter jwtFilter;
+
+  @MockBean private JWTValidator jwtValidator;
+
+  @BeforeEach
+  void setup() {}
 
   @Test
   public void list_customers_mapping_exists_returns_200_ok() throws Exception {

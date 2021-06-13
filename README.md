@@ -38,5 +38,18 @@ PUT:    {domain}/customers/{id}  - update specific user
 docker run -p 9090:8080 -e KEYCLOAK_USER=admin -e KEYCLOAK_PASSWORD=admin quay.io/keycloak/keycloak:13.0.1
 ```
 
+### Phase 1: JWT with using symmetric keys
+
+This service shall not support login and generating JWT's that is delegated to another service. This service
+only needs to be able to validate the token even though a first validation is performed at the system entry point. 
+All endpoints need authentication, so a global filter is used in front of the controllers to check for a valid JWT. 
+User details are not required by this service and can be made available in claims. Spring Security will therefore not be used by this service. 
+The signing secret is shared between services. From a security viewpoint not the most secure if a secret is compromised.
+
+- [x] Adding filter (OncePerRequest) 
+- [x] Unit Test validation of JWT
+- [x] Integration Test application of filter
+- [x] Modify already present tests with a mock filter
+
 ### import 
 [docs](https://hub.docker.com/r/jboss/keycloak/)

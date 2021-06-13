@@ -36,7 +36,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 })
 @ActiveProfiles("test") // database is referentie naar h2 in memory modus en modus MySQL
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-@AutoConfigureMockMvc
+@AutoConfigureMockMvc(addFilters = false)
 public class CustomerResourceITDBTest {
 
   Logger logger = LoggerFactory.getLogger(CustomerResourceITDBTest.class);
