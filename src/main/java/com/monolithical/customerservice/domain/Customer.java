@@ -37,21 +37,14 @@ public class Customer {
   public Customer() {}
 
   /** For manual construction */
-  public Customer(
-      Long id,
-      String firstName,
-      String lastNamePrefix,
-      String lastName,
-      String phoneNumber,
-      String email,
-      Address address) {
-    this.id = id;
-    this.firstName = firstName;
-    this.lastNamePrefix = lastNamePrefix;
-    this.lastName = lastName;
-    this.setPhoneNumber(phoneNumber);
-    this.setEmail(email);
-    this.address = address;
+  public Customer(Builder builder) {
+    this.id = builder.id;
+    this.firstName = builder.firstName;
+    this.lastNamePrefix = builder.lastNamePrefix;
+    this.lastName = builder.lastName;
+    this.setPhoneNumber(builder.phoneNumber);
+    this.setEmail(builder.email);
+    this.address = builder.address;
   }
 
   public void setEmail(String email) {
@@ -68,5 +61,50 @@ public class Customer {
           String.format("incorrect phone number format for: %s", phoneNumber));
     }
     this.phoneNumber = phoneNumber;
+  }
+
+  /** Convenience builder */
+  public static class Builder {
+    private Long id;
+    private String firstName;
+    private String lastNamePrefix;
+    private String lastName;
+    private String phoneNumber;
+    private String email;
+    private Address address;
+
+    public Builder firstName(String firstName) {
+      this.firstName = firstName;
+      return this;
+    }
+
+    public Builder lastNamePrefix(String lastNamePrefix) {
+      this.lastNamePrefix = lastNamePrefix;
+      return this;
+    }
+
+    public Builder lastName(String lastName) {
+      this.lastName = lastName;
+      return this;
+    }
+
+    public Builder phoneNumber(String phoneNumber) {
+      this.phoneNumber = phoneNumber;
+      return this;
+    }
+
+    public Builder email(String email) {
+      this.email = email;
+      return this;
+    }
+
+    public Builder setAddress(Address address) {
+      this.address = address;
+      return this;
+    }
+
+    public Customer build() {
+      return new Customer(this);
+    }
   }
 }

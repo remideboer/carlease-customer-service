@@ -25,12 +25,12 @@ public class Address {
 
   public Address() {}
 
-  public Address(String street, String postalCode, int number, String addition, String city) {
-    this.street = street;
-    this.setPostalCode(postalCode);
-    this.number = number;
-    this.addition = addition;
-    this.city = city;
+  public Address(Builder builder) {
+    this.street = builder.street;
+    this.setPostalCode(builder.postalCode);
+    this.number = builder.number;
+    this.addition = builder.addition;
+    this.city = builder.city;
   }
 
   public void setPostalCode(String postalCode) {
@@ -41,5 +41,43 @@ public class Address {
           String.format("incorrect postal code format for: %s", postalCode));
     }
     this.postalCode = postalCode;
+  }
+
+  /** Convenience Builder */
+  public static class Builder {
+    private String street;
+    private String postalCode;
+    private int number;
+    private String addition;
+    private String city;
+
+    public Builder street(String street) {
+      this.street = street;
+      return this;
+    }
+
+    public Builder postalCode(String postalCode) {
+      this.postalCode = postalCode;
+      return this;
+    }
+
+    public Builder number(int number) {
+      this.number = number;
+      return this;
+    }
+
+    public Builder addition(String addition) {
+      this.addition = addition;
+      return this;
+    }
+
+    public Builder city(String city) {
+      this.city = city;
+      return this;
+    }
+
+    public Address build() {
+      return new Address(this);
+    }
   }
 }
