@@ -8,7 +8,7 @@ import javax.validation.constraints.Pattern;
 
 /** Class for intercepting the body of the customer Post request */
 @Data
-public class CustomerPostBody {
+public class CustomerRequestBody {
 
   @NotNull private String firstName;
   private String lastNamePrefix;
