@@ -9,7 +9,7 @@ service (even though that would speed things up tremendously)
 - [x] create customer
 - [x] fetch customer by id
 - [x] update customers attribute
-- [ ] delete specific customer
+- [x] delete specific customer
 - [ ] fetch customers by name keyword
 - [x] authentication
 - [ ] containerize
