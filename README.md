@@ -74,7 +74,7 @@ compromised.
 
 ```
 development JWT
-eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNjIzNDk5NDk2fQ.0n3QQLClr65pSi59VebHVrts3pwzeo6zTeTK3Ru7wlU
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiZXhwIjoxNjIzNDk5NDk2fQ.DqXUy1Tr-zzV5H52PnwsE8_i6lphS4bsTnu2NbzJb3M
 ```
 
 ### import
