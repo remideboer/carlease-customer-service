@@ -26,7 +26,7 @@ api prefix and version should be handled by an api gateway
 - [x] GET:    {domain}/customers       - returns al customers ? possible filtering
 - [x] GET:    {domain}/customers/{id}  - returns specific customer
 - [x] POST    {domain}/customers       - create new user
-- [ ] DELETE: {domain}/customers/{id}  - delete specific user
+- [x] DELETE: {domain}/customers/{id}  - delete specific user
 - [x] PUT:    {domain}/customers/{id}  - update specific user
 ```
 

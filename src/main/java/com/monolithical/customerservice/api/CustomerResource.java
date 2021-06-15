@@ -29,25 +29,31 @@ public class CustomerResource {
     return customerRepository.findAll();
   }
 
+  /**
+   * Creates Customer resource
+   * @param customerRequestBody
+   * @param uriComponentsBuilder
+   * @return http status 201 if successfully created
+   */
   @PostMapping
   ResponseEntity<?> post(
-      @Valid @RequestBody CustomerPostBody customerPostBody,
+      @Valid @RequestBody CustomerRequestBody customerRequestBody,
       UriComponentsBuilder uriComponentsBuilder) {
     var createdCustomer =
         customerRepository.save(
             new Customer.Builder()
-                .firstName(customerPostBody.getFirstName())
-                .lastNamePrefix(customerPostBody.getLastNamePrefix())
-                .lastName(customerPostBody.getLastName())
-                .email(customerPostBody.getEmail())
-                .phoneNumber(customerPostBody.getPhoneNumber())
+                .firstName(customerRequestBody.getFirstName())
+                .lastNamePrefix(customerRequestBody.getLastNamePrefix())
+                .lastName(customerRequestBody.getLastName())
+                .email(customerRequestBody.getEmail())
+                .phoneNumber(customerRequestBody.getPhoneNumber())
                 .setAddress(
                     new Address.Builder()
-                        .street(customerPostBody.getStreet())
-                        .number(customerPostBody.getHouseNumber())
-                        .addition(customerPostBody.getAddition())
-                        .postalCode(customerPostBody.getPostalCode())
-                        .city(customerPostBody.getCity())
+                        .street(customerRequestBody.getStreet())
+                        .number(customerRequestBody.getHouseNumber())
+                        .addition(customerRequestBody.getAddition())
+                        .postalCode(customerRequestBody.getPostalCode())
+                        .city(customerRequestBody.getCity())
                         .build())
                 .build());
     UriComponents uriComponents =
@@ -55,6 +61,12 @@ public class CustomerResource {
     return ResponseEntity.created(uriComponents.toUri()).build();
   }
 
+  /**
+   * Fetches resources by given id
+   * @param id
+   * @return Customer resources with status code 200 OK if found
+   * status 404 Not Found is resources is not present
+   */
   @GetMapping("/{id}")
   ResponseEntity<?> fetchById(@PathVariable("id") Long id) {
     var optional = customerRepository.findById(id);
@@ -64,26 +76,50 @@ public class CustomerResource {
     return ResponseEntity.notFound().build();
   }
 
+  /**
+   * Updates resource with given id
+   * @param id
+   * @param customerRequestBody
+   * @return status 204 if successfully updated
+   * status 404 Not Found if resources is not present
+   */
   @PutMapping("/{id}")
   ResponseEntity<?> update(
-      @PathVariable("id") Long id, @RequestBody CustomerPostBody customerPostBody) {
+      @PathVariable("id") Long id, @RequestBody CustomerRequestBody customerRequestBody) {
     var optional = customerRepository.findById(id);
     if (optional.isPresent()) {
       var customer = optional.get();
-      customer.setFirstName(customerPostBody.getFirstName());
-      customer.setLastNamePrefix(customerPostBody.getLastNamePrefix());
-      customer.setLastName(customerPostBody.getLastName());
-      customer.setEmail(customerPostBody.getEmail());
-      customer.setPhoneNumber(customerPostBody.getPhoneNumber());
+      customer.setFirstName(customerRequestBody.getFirstName());
+      customer.setLastNamePrefix(customerRequestBody.getLastNamePrefix());
+      customer.setLastName(customerRequestBody.getLastName());
+      customer.setEmail(customerRequestBody.getEmail());
+      customer.setPhoneNumber(customerRequestBody.getPhoneNumber());
       customer.setAddress(
           new Address.Builder()
-              .street(customerPostBody.getStreet())
-              .addition(customerPostBody.getAddition())
-              .postalCode(customerPostBody.getPostalCode())
-              .city(customerPostBody.getCity())
+              .street(customerRequestBody.getStreet())
+              .addition(customerRequestBody.getAddition())
+              .postalCode(customerRequestBody.getPostalCode())
+              .city(customerRequestBody.getCity())
               .build());
       customerRepository.save(customer);
-      return ResponseEntity.ok(customer); // test if set in db and if in response body
+      return ResponseEntity.noContent().build();
+    }
+    return ResponseEntity.notFound().build();
+  }
+
+  /**
+   * Deletes resources with given id
+   *
+   * @param id
+   * @return status 204 if successfully updated
+   * status 404 Not Found if resources is not present
+   */
+  @DeleteMapping("/{id}")
+  ResponseEntity<?> delete(@PathVariable("id") Long id) {
+    var optional = customerRepository.findById(id);
+    if(optional.isPresent()){
+      customerRepository.delete(optional.get());
+      return ResponseEntity.noContent().build();
     }
     return ResponseEntity.notFound().build();
   }
