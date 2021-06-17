@@ -4,6 +4,7 @@
 
 RESTFull webservice facilitating CRUD operations on a Customer datastore Not using Spring REST repositories for this
 service (even though that would speed things up tremendously)
+Endpoints require a valid JWT issued by an API-gateway sharing the same secret
 
 - [x] list customers
 - [x] create customer
@@ -19,15 +20,15 @@ Phasing depends on how much time can be made free
 ### URL mapping
 
 - [x] Phase 1: Basic URL mapping docs
-- [ ] Phase 2: Swagger docs
+- [ ] Phase 2: Swagger docs / REST Docs
 
 ```
 api prefix and version should be handled by an api gateway
 - [x] GET:    {domain}/customers       - returns al customers ? possible filtering
 - [x] GET:    {domain}/customers/{id}  - returns specific customer
-- [x] POST    {domain}/customers       - create new user
-- [x] DELETE: {domain}/customers/{id}  - delete specific user
-- [x] PUT:    {domain}/customers/{id}  - update specific user
+- [x] POST    {domain}/customers       - create new customer
+- [x] DELETE: {domain}/customers/{id}  - delete specific customer
+- [x] PUT:    {domain}/customers/{id}  - update specific customer
 ```
 
 Sample POST/PUT Body
@@ -72,9 +73,38 @@ compromised.
 - [x] Integration Test application of filter
 - [x] Modify already present tests with a mock filter
 
+#### Implementation
+
+JWT is evaluated in
+a [```OncePerRequest```](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/filter/OncePerRequestFilter.html)
+filter on signature integrity and on expiration using the [Nimbus JOSE](https://connect2id.com/products/nimbus-jose-jwt)
+library.
+
+## Run application
+
+This service runs on port 9092
+
+In development use dev profile:
+
+```shell
+mvn spring-boot:run -Dspring-boot.run.profiles=dev
 ```
-development JWT
-eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiZXhwIjoxNjIzNDk5NDk2fQ.DqXUy1Tr-zzV5H52PnwsE8_i6lphS4bsTnu2NbzJb3M
+
+When not using an authentication service to create a valid token got to [jwt.io](https://jwt.io/) set the expiration ```"exp"``` claim
+to later then current UTC and use a secret in the dev profile:
+
+JWT payload example
+```json
+{
+  "sub": "1234567890",
+  "name": "Jaap Test",
+  "exp": 1624003711
+}
+```
+
+```
+// current development secret
+secret=imasecretimasecretimasecretimasecret
 ```
 
 ### import
