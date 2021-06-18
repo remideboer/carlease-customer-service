@@ -1,3 +1,5 @@
+create schema if not exists customer_service;
+use customer_service;
 drop table if exists klant;
 create table if not exists klant
 (
