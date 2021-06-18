@@ -24,11 +24,11 @@ Phasing depends on how much time can be made free
 
 ```
 api prefix and version should be handled by an api gateway
-- [x] GET:    {domain}/customers       - returns al customers ? possible filtering
-- [x] GET:    {domain}/customers/{id}  - returns specific customer
-- [x] POST    {domain}/customers       - create new customer
-- [x] DELETE: {domain}/customers/{id}  - delete specific customer
-- [x] PUT:    {domain}/customers/{id}  - update specific customer
+- [x] GET:    {domain}/customers          - returns al customers
+- [x] GET:    {domain}/customers/{id}     - returns specific customer
+- [x] POST    {domain}/customers          - create new customer
+- [x] DELETE: {domain}/customers/{id}     - delete specific customer
+- [x] PUT:    {domain}/customers/{id}     - update specific customer
 ```
 
 Sample POST/PUT Body
